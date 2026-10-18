@@ -1,0 +1,43 @@
+{
+  "name": "lockfile-diff-action",
+  "version": "1.0.0",
+  "description": "GitHub Action that comments on pull requests with a readable summary of lockfile changes: packages added, removed, upgraded or downgraded, major bumps, and how much bigger installs get.",
+  "keywords": [
+    "github-action",
+    "lockfile",
+    "dependencies",
+    "package-lock",
+    "pnpm",
+    "yarn",
+    "bun",
+    "pull-request",
+    "diff"
+  ],
+  "homepage": "https://github.com/acus9345/lockfile-diff-action#readme",
+  "bugs": {
+    "url": "https://github.com/acus9345/lockfile-diff-action/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acus9345/lockfile-diff-action.git"
+  },
+  "license": "MIT",
+  "author": "acus9345 <acus9345@gmail.com>",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "prelint": "npm run build",
+    "lint": "tsc -p tsconfig.json",
+    "pretest": "npm run build",
+    "test": "node --test \"test/*.test.ts\""
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "^7.0.2"
+  }
+}

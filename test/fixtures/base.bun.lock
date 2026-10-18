@@ -1,0 +1,17 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "x",
+      "dependencies": {
+        "@types/ms": "0.7.34",
+        "ms": "2.1.2",
+      },
+    },
+  },
+  "packages": {
+    "@types/ms": ["@types/ms@0.7.34", "", {}, "sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g=="],
+
+    "ms": ["ms@2.1.2", "", {}, "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="],
+  }
+}

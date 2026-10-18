@@ -1,0 +1,43 @@
+name: Lockfile Diff Summary
+description: Comment on pull requests with a readable summary of lockfile changes, including added, removed, upgraded and downgraded packages, major bumps and install size.
+author: acus9345
+branding:
+  icon: package
+  color: blue
+
+inputs:
+  token:
+    description: Token used to read the pull request and post the comment. Needs pull-requests write permission to comment.
+    default: ${{ github.token }}
+  comment:
+    description: Post (and keep updating) one comment on the pull request.
+    default: "true"
+  sizes:
+    description: Look up unpacked package sizes on the npm registry to show how install size changes.
+    default: "true"
+  max-rows:
+    description: Most rows to show per table before summarizing the rest.
+    default: "50"
+  fail-on:
+    description: Fail the step when a direct dependency has one of these changes, comma-separated. Any of major, downgrade, added, removed. Empty never fails.
+    default: ""
+
+outputs:
+  changed:
+    description: '"true" when any package was added, removed or changed version.'
+  added:
+    description: Number of packages added.
+  removed:
+    description: Number of packages removed.
+  updated:
+    description: Number of packages whose version changed.
+  major:
+    description: Number of major (breaking) version bumps.
+  size-delta:
+    description: Change in unpacked install size, in bytes, for the packages whose size could be looked up.
+  markdown:
+    description: The summary as Markdown.
+
+runs:
+  using: node24
+  main: dist/index.js

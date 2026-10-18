@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      # The runner executes the committed dist/, so it must match the source.
+      - name: Check that dist/ is up to date
+        run: |
+          if [ -n "$(git status --porcelain dist)" ]; then
+            git status --porcelain dist
+            echo "::error::dist/ is out of date. Run npm run build and commit dist/."
+            exit 1
+          fi
+
+  # Run the action on its own pull requests.
+  self-test:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./
